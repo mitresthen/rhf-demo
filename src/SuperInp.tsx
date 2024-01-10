@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 export type SuperInpProps = {
   value: BetterRange;
-  setValue: (val: BetterRange) => void;
+  onChange: (val: BetterRange) => void;
 };
 
 export type BetterRange = {
@@ -10,13 +10,16 @@ export type BetterRange = {
   end: number;
 };
 
-export const SuperInp = ({ value, setValue }: SuperInpProps) => {
+export const SuperInp = ({ value, onChange }: SuperInpProps) => {
   const set = (key: "start" | "end") => (e: ChangeEvent<HTMLInputElement>) => {
-    setValue({
+    onChange({
       ...value,
       [key]: e.target.value,
     });
   };
+
+
+  console.log(value)
   return (
     <div className="flex flex-col gap-4">
       <p>{value.start}</p>
