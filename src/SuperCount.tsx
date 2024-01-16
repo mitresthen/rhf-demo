@@ -7,7 +7,7 @@ export const SuperCount = ({value, onChange}: SuperCountProps) => {
 
     return (
         <button onClick={() => {
-            onChange(value + 1)
+            onChange(Number(value) + 1)
         }}>Press me pls {value}</button>
     )
 }

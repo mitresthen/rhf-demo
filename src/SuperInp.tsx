@@ -22,23 +22,23 @@ export const SuperInp = ({ value, onChange }: SuperInpProps) => {
   console.log(value)
   return (
     <div className="flex flex-col gap-4">
-      <p>{value.start}</p>
+      <p>{value?.start}</p>
 
       <input
         type="range"
         min={2}
         max={22}
-        value={value.start}
+        value={value?.start}
         onChange={set("start")}
       />
       <br />
-      <p>{value.end}</p>
+      <p>{value?.end}</p>
 
       <input
         type="range"
         min={420}
         max={80085}
-        value={value.end}
+        value={value?.end}
         onChange={set("end")}
       />
     </div>

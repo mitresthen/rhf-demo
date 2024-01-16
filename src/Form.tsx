@@ -1,46 +1,34 @@
+import { useState } from "react";
 import "./App.css";
-import { SuperCount } from "./SuperCount";
-import { BetterRange, SuperInp } from "./SuperInp";
-import { Controller, useForm } from "react-hook-form";
+import { Page1 } from "./Page1";
+import { Page2 } from "./Page2";
+import { BetterRange } from "./SuperInp";
+import { useForm } from "react-hook-form";
 
-interface IFormInput {
-  range: BetterRange;
+export interface IFormInput {
+  range1: BetterRange;
+  range2: BetterRange;
 }
 
 export function Form() {
-  const { control, watch, setValue } = useForm<IFormInput>({
-    defaultValues: {
-      range: {
-        start: 2,
-        end: 500,
-      },
-    },
+  const [toggle, setToggle] = useState<boolean>(true);
+  const formReturn = useForm<IFormInput>({
+    
   });
 
-  const curr = watch("range");
+  const all = formReturn.watch();
 
   return (
     <>
-      <Controller
-        name="range"
-        control={control}
-        render={({ field }) => <SuperInp {...field} />}
-      />
-      <button
-        onClick={() => {
-          setValue("range", { start: curr.start, end: 1337 });
-        }}
-      >
-        LEET
-      </button>
-      <h1>{JSON.stringify(curr)}</h1>
+      <button onClick={() => setToggle((old) => !old)}>Toggle</button>
+      {toggle ? (
+        <Page1 key="p1" formReturn={formReturn} />
+      ) : (
+        <Page2 key="p2" formReturn={formReturn} />
+      )}
+      <h1>{JSON.stringify(all)}</h1>
 
-      <Controller
-        name="range.start"
-        control={control}
-        render={({ field }) => <SuperCount {...field} />}
-      />
+
     </>
   );
 }
-
